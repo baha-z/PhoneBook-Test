@@ -11,7 +11,16 @@
       <ion-card-content>
           <ion-input type="text" [(ngModel)]="name" id="name" placeholder="Nombre"></ion-input>
           <ion-input type="text" [(ngModel)]="lastname" id="lastname" placeholder="Nombre" placeholder="Apellido"></ion-input>
+          <ion-select placeholder="Selecciona Region" (ionChange)="getComuna($event.detail.value)" okText="Confirmar" cancelText="Cancelar">
+            <ion-select-option *ngFor="let region of regiones">{{region.nombre}}</ion-select-option>
+          </ion-select>
+          <div>
+            <ion-select placeholder="Selecciona Comuna" okText="Confirmar" cancelText="Cancelar">
+              <ion-select-option *ngFor="let comuna of comunas">{{comuna.nombre}}</ion-select-option>
+            </ion-select>
+          </div>
           <ion-button (click)="filterItems()" expand="block">Buscar Personas</ion-button>
+          
           <hr>
           <ion-list>
             <ion-item *ngFor="let person of filteredArray">

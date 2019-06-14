@@ -12,21 +12,48 @@ export class Tab1Page implements OnInit  {
   public filteredArray = [];
   public name: string;
   public lastname: string;
+  public selectedRegion: string;
+  public selectedComuna: string;
+  public regiones = [];
+  public comunas = [];
 
   constructor(
     private apiService: ApiServiceService
   ) {}
 
-   
   ngOnInit() {
     this.getPersona();
+    this.getRegion();
    }
+
+  getRegion(){
+    this.apiService.getRegion().subscribe(
+      (data: any) => {
+        data.map((region: any) => {
+          this.regiones.push(region);
+        });
+      }
+    )
+    console.log(this.regiones);
+
+  }
+
+  getComuna(region:any){
+    let SRegion = [];
+    this.selectedRegion = region;
+    SRegion = this.regiones.filter(regionA => 
+      regionA.nombre.toLowerCase().indexOf(region.toLowerCase()) > -1
+    );
+    
+    this.comunas = SRegion[0].comunas
+    console.log(this.comunas);
+    //this.comunas.push(...comuna);
+  }
 
   getPersona() {
    this.apiService.getPersona().subscribe(
-    (data: any) => { // Success
-      console.log(data);
-      data.map((person: any) =>{
+    (data: any) => {
+      data.map((person: any) => {
         if (person.activo){
           this.personList.push(person);
         }
@@ -52,5 +79,4 @@ export class Tab1Page implements OnInit  {
     }
     console.log(this.filteredArray);
   }
-
 }

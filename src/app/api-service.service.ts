@@ -22,11 +22,6 @@ export class ApiServiceService {
   }
 
   getRegion() {
-    return this.http.get(`${this.url}/region`).subscribe((res)=>{
-      console.log(res);
-    }); 
+    return this.http.get(`${this.url}/region`);
   }
-
-  
-
 }
