@@ -15,7 +15,7 @@
             <ion-select-option *ngFor="let region of regiones">{{region.nombre}}</ion-select-option>
           </ion-select>
           <div>
-            <ion-select placeholder="Selecciona Comuna" okText="Confirmar" cancelText="Cancelar">
+            <ion-select placeholder="Selecciona Comuna" (ionChange)="getSelectedComuna($event.detail.value)" okText="Confirmar" cancelText="Cancelar">
               <ion-select-option *ngFor="let comuna of comunas">{{comuna.nombre}}</ion-select-option>
             </ion-select>
           </div>

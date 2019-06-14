@@ -35,7 +35,6 @@ export class Tab1Page implements OnInit  {
       }
     )
     console.log(this.regiones);
-
   }
 
   getComuna(region:any){
@@ -44,10 +43,11 @@ export class Tab1Page implements OnInit  {
     SRegion = this.regiones.filter(regionA => 
       regionA.nombre.toLowerCase().indexOf(region.toLowerCase()) > -1
     );
-    
     this.comunas = SRegion[0].comunas
-    console.log(this.comunas);
-    //this.comunas.push(...comuna);
+  }
+
+  getSelectedComuna(comuna:any){
+    this.selectedComuna = comuna;
   }
 
   getPersona() {
@@ -76,6 +76,11 @@ export class Tab1Page implements OnInit  {
       this.filteredArray = this.filteredArray.filter(item => 
         item.apellido.toLowerCase().indexOf(this.lastname.toLowerCase()) > -1
       );
+    }
+    if (this.selectedComuna !== "" && this.selectedComuna !== undefined){
+      this.filteredArray = this.filteredArray.filter(item => 
+          item.direccion.comuna.nombre.toLowerCase().indexOf(this.selectedComuna.toLowerCase()) > -1
+        );
     }
     console.log(this.filteredArray);
   }
