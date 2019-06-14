@@ -82,6 +82,9 @@ export class Tab1Page implements OnInit  {
           item.direccion.comuna.nombre.toLowerCase().indexOf(this.selectedComuna.toLowerCase()) > -1
         );
     }
-    console.log(this.filteredArray);
+  }
+
+  showPerson(person:any){
+    console.log(person);
   }
 }
