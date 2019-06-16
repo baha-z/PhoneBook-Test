@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page implements OnInit  {
-
+  public hasErrors: boolean = false;
   data: any;
 
   constructor(
@@ -24,11 +24,40 @@ export class Tab2Page implements OnInit  {
   }
 
   ngOnInit() {
-    this.loadData();
   }
 
-  loadData(){
-    console.log(this.data);
-  }
+  //metodo adaptado de https://gist.github.com/rotvulpix/69a24cc199a4253d058c
+  checkRut() {
+    const rawrut = this.data.rut;
+    let valor = rawrut.replace('.','');
+    valor = valor.replace('-','');
+    const cuerpo = valor.slice(0,-1);
+    let dv = valor.slice(-1).toUpperCase();
+  
+    if(cuerpo.length < 7) {
+       return false;
+    }
 
+    let suma = 0;
+    let multiplo = 2;
+
+    for(let i=1; i <= cuerpo.length; i++) {
+        const index = multiplo * valor.charAt(cuerpo.length - i);
+        suma = suma + index;
+        if(multiplo < 7) {
+          multiplo = multiplo + 1;
+        } else { 
+          multiplo = 2;
+        }
+    }
+    
+    let dvEsperado = 11 - (suma % 11);
+    dv = (dv == 'K')?10:dv;
+    dv = (dv == 0)?11:dv;
+    
+    if(dvEsperado != dv) {
+       return false; 
+    }
+    return true;
+}
 }

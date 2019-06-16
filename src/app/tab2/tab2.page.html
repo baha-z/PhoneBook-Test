@@ -1,9 +1,50 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
     <ion-title>
-      Test
+      {{data.nombre}} {{data.apellido}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  
+<ion-card>
+  <span  class="main-profile">
+    <ion-icon name="contact"></ion-icon>
+  </span>
+
+  <ion-item class="alert" *ngIf="data.telefono.toString().length !== 11">
+    <p>Error: El numero de telefono debe contener 11 digitos</p>
+  </ion-item> 
+
+  <ion-item class="alert" *ngIf="!checkRut()">
+    <p>Error: El rut es invalido</p>
+  </ion-item> 
+  
+
+  <ion-item>
+    <ion-icon name="call" slot="start"></ion-icon>
+    <ion-label>Telefono: {{data.telefono}}</ion-label>
+  </ion-item>
+
+
+  <ion-item >
+    <ion-icon name="card" slot="start"></ion-icon>
+    <ion-label>Rut: {{data.rut}}</ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="map" slot="start"></ion-icon>
+    <ion-label>
+      Dirección: {{data.direccion.calle}} {{data.direccion.numero}} <br>
+      Comuna de {{data.direccion.comuna.nombre}}
+    </ion-label>
+  </ion-item>
+
+
+
+</ion-card>
+</ion-content>
