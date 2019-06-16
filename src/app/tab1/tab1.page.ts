@@ -1,5 +1,6 @@
 import { Component, OnInit  } from '@angular/core';
 import { ApiServiceService } from '../api-service.service';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -18,7 +19,8 @@ export class Tab1Page implements OnInit  {
   public comunas = [];
 
   constructor(
-    private apiService: ApiServiceService
+    private apiService: ApiServiceService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -84,7 +86,12 @@ export class Tab1Page implements OnInit  {
     }
   }
 
-  showPerson(person:any){
-    console.log(person);
+  openDetailsPerson(person:any){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        user: person
+      }
+    };
+    this.router.navigate(['profile'], navigationExtras);
   }
 }

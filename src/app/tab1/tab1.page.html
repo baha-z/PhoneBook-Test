@@ -23,7 +23,7 @@
           
           <hr>
           <ion-list>
-            <ion-item *ngFor="let person of filteredArray" (click)="showPerson(person)">
+            <ion-item *ngFor="let person of filteredArray" (click)="openDetailsPerson(person)">
               <ion-icon name="contact"></ion-icon>
               <ion-label>{{person.nombre}} {{person.apellido}}</ion-label>
             </ion-item>
